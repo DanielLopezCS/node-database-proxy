@@ -87,7 +87,7 @@ router.post('/', (req: Request, res: Response) => {
 });
 ```
 ## Add to server and run
-## Add your route to your server.ts file and use it such as:
+### Add your route to your server.ts file and use it such as:
 ```
 import userRoutes from './routes/userRoutes'; 
 // Use the userRoutes for '/users' related routes
