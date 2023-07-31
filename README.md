@@ -12,8 +12,10 @@ Node Database Proxy is a simple Node.js application that acts as a proxy for dat
 
 # Install dependencies:
 
-**cd node-database-proxy/src**
-**npm install**
+```cd node-database-proxy/src```
+
+```npm install```
+
 Set up the database:
 Create create JSON schema files for each table/collection you want to create in the src/schema folder. Example schema files can be found here(users.json and posts.json).
 
