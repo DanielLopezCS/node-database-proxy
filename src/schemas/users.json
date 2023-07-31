@@ -1,0 +1,21 @@
+[
+    {
+      "name": "id",
+      "type": "integer",
+      "primary": true
+    },
+    {
+      "name": "username",
+      "type": "text",
+      "unique": true
+    },
+    {
+      "name": "email",
+      "type": "text",
+      "unique": true
+    },
+    {
+      "name": "password",
+      "type": "text"
+    }
+  ]
