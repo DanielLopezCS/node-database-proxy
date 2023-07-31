@@ -39,6 +39,35 @@ router.get('/', (req: Request, res: Response) => {
   });
 });
 
+// @route   GET api/posts/:id
+// @desc    Gets a post by ID
+// @access  Public
+router.get('/:id', (req: Request, res: Response) => {
+    const postId = req.params.id;
+  
+    // Check if the provided ID is a valid integer
+    if (!Number.isInteger(Number(postId))) {
+      return res.status(400).json({ error: 'Invalid post ID. Must be a valid integer.' });
+    }
+  
+    // Retrieve the post from the "posts" table
+    const selectQuery = 'SELECT * FROM posts WHERE id = ?;';
+    db.get(selectQuery, postId, (err: Error | null, row: any) => {
+      if (err) {
+        console.error('Error retrieving post:', err.message);
+        return res.status(500).json({ error: 'Error retrieving post.' });
+      }
+  
+      if (!row) {
+        // Post with the specified ID was not found
+        return res.status(404).json({ error: 'Post not found.' });
+      }
+  
+      return res.status(200).json(row);
+    });
+  });
+
+  
 // @route   DELETE api/posts/:id
 // @desc    Deletes a post at an id
 // @access  Public

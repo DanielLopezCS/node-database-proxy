@@ -1,17 +1,17 @@
 [
-    {
-      "name": "id",
-      "type": "integer",
-      "primary": true
-    },
-    {
-      "name": "title",
-      "type": "text",
-      "unique": true
-    },
-    {
-      "name": "body",
-      "type": "text",
-      "unique": true
-    }
+  {
+    "name": "id",
+    "type": "integer",
+    "primary": true
+  },
+  {
+    "name": "title",
+    "type": "text",
+    "unique": false
+  },
+  {
+    "name": "body",
+    "type": "text",
+    "unique": false
+  }
 ]

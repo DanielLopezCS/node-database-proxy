@@ -39,21 +39,34 @@ router.get('/', (req: Request, res: Response) => {
   });
 });
 
-// @route   GET api/users
-// @desc    Gets all users
+// @route   GET api/users/:id
+// @desc    Gets a user by ID
 // @access  Public
-router.get('/', (req: Request, res: Response) => {
-  // Retrieve all users from the "users" table
-  const selectQuery = 'SELECT * FROM users;';
-  db.all(selectQuery, (err: Error | null, rows: any[]) => {
+router.get('/:id', (req: Request, res: Response) => {
+  const userId = req.params.id;
+
+  // Check if the provided ID is a valid integer
+  if (!Number.isInteger(Number(userId))) {
+    return res.status(400).json({ error: 'Invalid user ID. Must be a valid integer.' });
+  }
+
+  // Retrieve the user from the "users" table
+  const selectQuery = 'SELECT * FROM users WHERE id = ?;';
+  db.get(selectQuery, userId, (err: Error | null, row: any) => {
     if (err) {
-      console.error('Error retrieving users:', err.message);
-      return res.status(500).json({ error: 'Error retrieving users.' });
+      console.error('Error retrieving user:', err.message);
+      return res.status(500).json({ error: 'Error retrieving user.' });
     }
 
-    return res.status(200).json(rows);
+    if (!row) {
+      // User with the specified ID was not found
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    return res.status(200).json(row);
   });
 });
+
 
   // @route   DELETE api/users/:id
   // @desc    Deletes a user at an id
